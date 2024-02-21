@@ -22,7 +22,7 @@ jobs:
           bundler-cache: true
 
       - name: Install CocoaPods
-        run: gem install cocoapods
+        run: gem install cocoapods -v 1.14.3
 
       - name: Check CocoaPods version
         run: pod --version
