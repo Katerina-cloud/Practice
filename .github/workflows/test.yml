@@ -11,6 +11,10 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
+      - name: Install pods
+        run: |
+          cd ios
+          pod install
       - name: Run tests
-        run: npm test
+        run: yarn test
