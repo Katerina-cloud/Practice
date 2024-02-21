@@ -19,10 +19,9 @@ jobs:
         run: sudo gem install cocoapods
 
       - name: Change directory to ios
-        run: cd ios
-
-      - name: Install iOS dependencies with CocoaPods
-        run: pod install
+        run: |
+          cd ios
+          pod install
 
       - name: Run tests
         run: yarn test
