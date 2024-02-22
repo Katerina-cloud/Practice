@@ -6,6 +6,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21  
 
       - name: Run tests
         run: yarn test
@@ -14,7 +19,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-
+      
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21  
       - name: Run lint
         run: yarn lint
 
