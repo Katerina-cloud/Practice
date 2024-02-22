@@ -7,6 +7,24 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
 
+      - name: Run tests
+        run: yarn test
+  lint: 
+    runs-on: [macos-13]
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+
+      - name: Run lint
+        run: yarn lint
+
+  deploy:
+    runs-on: [macos-13]
+    needs: [test, lint]
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
@@ -28,5 +46,4 @@ jobs:
         run: |
           cd ios && pod install
 
-      - name: Run tests
-        run: yarn test
+    

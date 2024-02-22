@@ -1,0 +1,10 @@
+name: Test Project
+on: issues
+jobs:
+  test:
+    runs-on: [macos-13]
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Ouput context
+        run: echo "${{toJson(github.event)}}"
