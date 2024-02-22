@@ -11,6 +11,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21  
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile    
 
       - name: Run tests
         run: yarn test
@@ -24,6 +27,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 21  
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile    
+                  
       - name: Run lint
         run: yarn lint
 
