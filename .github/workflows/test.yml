@@ -6,31 +6,31 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      
+
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 21  
-      
+          node-version: 21
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile    
+        run: yarn install --frozen-lockfile
 
       - name: Run tests
         run: yarn test
-  lint: 
+  lint:
     runs-on: [macos-13]
     steps:
       - name: Get code
         uses: actions/checkout@v3
-      
+
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: 21  
-      
+          node-version: 21
+
       - name: Install dependencies
-        run: yarn install --frozen-lockfile    
-                  
+        run: yarn install --frozen-lockfile
+
       - name: Run lint
         run: yarn lint
 
@@ -62,4 +62,11 @@ jobs:
         run: |
           cd ios && pod install
 
-    
+      - name: Create file
+        run: echo "test" > file.txt
+
+      - name: Upload artifact
+        uses: Upload artifacts
+        with:
+          name: file.txt
+          path: file.txt
