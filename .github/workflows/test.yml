@@ -66,14 +66,16 @@ jobs:
           ruby-version: 2.7
           bundler-cache: true
 
-      - name: Install CocoaPods
-        run: gem install cocoapods
+      # - name: Install CocoaPods
+      #   run: gem install cocoapods
 
-      - name: Install pod
-        run: |
-          cd ios && pod install
+      # - name: Install pod
+      #   run: |
+      #     cd ios && pod install
 
       - name: Get build artifacts
         uses: actions/download-artifact@v3
         with:
           name: test-files
+      - name: Output contetns
+        run: ls
