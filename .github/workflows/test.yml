@@ -33,6 +33,17 @@ jobs:
 
       - name: Run lint
         run: yarn lint
+  build:
+    runs-on: [macos-13]
+    steps:
+      - name: Create file
+        run: echo "test" > file.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-files
+          path: file.txt
 
   deploy:
     runs-on: [macos-13]
@@ -62,11 +73,7 @@ jobs:
         run: |
           cd ios && pod install
 
-      - name: Create file
-        run: echo "test" > file.txt
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
         with:
-          name: file.txt
-          path: file.txt
+          name: test-files
