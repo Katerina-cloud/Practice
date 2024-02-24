@@ -35,19 +35,36 @@ jobs:
         run: yarn lint
   build:
     runs-on: [macos-13]
+    needs: [test, lint]
+    outputs:
+      sourcemap: ${{steps.publish-sourcemap.outputs.sourcemap}}
+      bundle: ${{steps.publish-sourcemap.outputs.bundle}}
     steps:
       - name: Create file
-        run: echo "test" > file.txt
+        run: npx react-native bundle \
+          --dev false \
+          --minify true \
+          --platform ios \
+          --entry-file index.js \
+          --reset-cache \
+          --bundle-output main.jsbundle \
+          --sourcemap-output main.jsbundle.map
+
+      - name: Publish sourcemap file
+        id: publish-sourcemap
+        run: find main.jsbundle.map -type f -execdir echo 'sourcemap={}' >> $GITHUB_OUTPUT ';'
+      - name: Publish bundle file
+        run: find main.jsbundle -type f -execdir echo 'bundle={}' >> $GITHUB_OUTPUT ';'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: test-files
-          path: file.txt
+          path: main.jsbundle.map
 
   deploy:
     runs-on: [macos-13]
-    needs: [test, lint]
+    needs: [build]
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -72,7 +89,10 @@ jobs:
       # - name: Install pod
       #   run: |
       #     cd ios && pod install
-
+      - name: Output sourcemap filename
+        run: echo "${{needs.build.outputs.sourcemap}}"
+      - name: Output bundle filename
+        run: echo "${{needs.build.outputs.bundle}}"
       - name: Get build artifacts
         uses: actions/download-artifact@v3
         with:
