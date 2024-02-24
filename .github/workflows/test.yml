@@ -40,6 +40,17 @@ jobs:
       sourcemap: ${{steps.publish-sourcemap.outputs.sourcemap}}
       bundle: ${{steps.publish-sourcemap.outputs.bundle}}
     steps:
+      - name: Get code
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 21
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
       - name: Create file
         run: npx react-native bundle \
           --dev false \
