@@ -48,6 +48,12 @@ jobs:
         with:
           node-version: 21
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
@@ -62,7 +68,10 @@ jobs:
           --bundle-output main.jsbundle \
           --sourcemap-output main.jsbundle.map
 
-      - name: Publish sourcemap file
+      - name: Publish sourcemap file name to make it available for other jobs.
+          For this we need to add outputs in the beginning of the job.
+          GITHUB_OUTPUT - targets a special github file in the environment in which the job runs,
+          where the output key value  pare is written to. Here sourcemap = main.jsbundle.map a string containing the file path
         id: publish-sourcemap
         run: find main.jsbundle.map -type f -execdir echo 'sourcemap={}' >> $GITHUB_OUTPUT ';'
       - name: Publish bundle file
@@ -101,7 +110,7 @@ jobs:
       # - name: Install pod
       #   run: |
       #     cd ios && pod install
-      - name: Output sourcemap filename
+      - name: Output sourcemap filename - output created by the build job
         run: echo "${{needs.build.outputs.sourcemap}}"
       - name: Output bundle filename
         run: echo "${{needs.build.outputs.bundle}}"
@@ -109,5 +118,5 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-files
-      - name: Output contetns
+      - name: Output contents
         run: ls
