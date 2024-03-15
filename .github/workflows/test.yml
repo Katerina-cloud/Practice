@@ -1,7 +1,14 @@
 name: Test Project
 on: push
+env:
+  MONGO_DB_NAME: gha-demo
 jobs:
   test:
+    env:
+      MONGODB_CLUSTER_ADDRESS: cluster0.ziirjth.mongodb.net
+      MONGODB_USERNAME: kateTestDatabase
+      MONGODB_PASSWORD: bcwTAYfV6yE4kfqh
+
     runs-on: [macos-13]
     steps:
       - name: Get code
@@ -23,6 +30,7 @@ jobs:
 
       - name: Run tests
         run: yarn test
+
   lint:
     runs-on: [macos-13]
     steps:
@@ -137,3 +145,7 @@ jobs:
           name: test-files
       - name: Output contents
         run: ls
+      - name: Echo env var
+        run: |
+          echo ${{env.MONGO_DB_NAME}}  
+          echo ${{env.MONGODB_USERNAME}}
