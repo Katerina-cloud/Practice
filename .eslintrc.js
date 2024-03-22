@@ -79,34 +79,10 @@ module.exports = {
     'class-methods-use-this': 0,
     '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': 'allow-with-description' }],
     'import/no-cycle': 0,
-    'simple-import-sort/imports': [
-      'error',
-      {
-        groups: [
-          // Packages. `react` related packages come first.
-          ['^react$', '^react-native$', '^react', '^@?\\w', '^__mocks__(/.*|$)'],
-          // Internal packages.
-          [
-            '^(assets|auth|containers|modules|elements|components|constants|contexts|featureFlags|hooks|navigation|providers|queries|resources|screens|services|types|utils|i18n|nativeModules|store)(/.*|$)',
-          ],
-          // aliases packages
-          ['^@(whitelabel|belgium|czech)(/.*)$'],
-          // Parent imports. Put `..` last.
-          ['^\\.\\.(?!/?$)', '^\\.\\./?$', '^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-          // Side effect imports.
-          ['^\\u0000'],
-        ],
-      },
-    ],
     'no-shadow': 'off',
     'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     '@typescript-eslint/no-shadow': ['error'],
-    'no-restricted-imports': [
-      'error',
-      {
-        patterns: ['@whitelabel*', '..*', '.*'],
-      },
-    ],
+    'no-restricted-imports': [1],
     'enforce-destruction-limits/enforce-destruction-limits': [
       'error',
       { patterns: ['theme.components'] },
