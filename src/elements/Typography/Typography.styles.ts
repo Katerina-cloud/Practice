@@ -3,7 +3,7 @@ import { TextStyle } from 'react-native';
 import { Theme } from '@rneui/themed';
 import { get } from 'lodash';
 
-import { ColorsType, createStyles } from '@fresh-direct/theme';
+import { ColorsType, createStyles } from '../../theme/index';
 
 export type Variant =
   | 'h1'

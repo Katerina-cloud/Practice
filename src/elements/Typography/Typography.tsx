@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { Text, TextProps } from '@rneui/themed';
 
-// import { TestIDProps, setTestId } from '@fresh-direct/utils';
-
 import { StylingProps, useTypographyStyles } from './Typography.styles';
 
 interface TypographyComponentProps
