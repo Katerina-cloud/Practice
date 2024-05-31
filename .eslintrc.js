@@ -115,25 +115,6 @@ module.exports = {
     {
       files: ['src/**/*'],
       excludedFiles: ['src/**/*.test.*'],
-      rules: {
-        'jsx-helpers/jsx-enforce-attribute': [
-          'error',
-          {
-            attributeName: 'testID',
-            elementMatchers: [
-              'Pressable',
-              'Touchable*',
-              '^(Base)?Button$',
-              'CheckBox',
-              'Switch',
-              '^Text$',
-              'TextInput',
-              '^(Fast)?Image$',
-              'Icon',
-            ],
-          },
-        ],
-      },
     },
     {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
