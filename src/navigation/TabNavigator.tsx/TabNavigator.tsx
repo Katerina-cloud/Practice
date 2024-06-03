@@ -2,29 +2,13 @@ import React from 'react';
 import { HomeScreen } from '../../screens/HomeScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ToolsScreen } from '../../screens/ToolsScreen';
-import { ImageBackground, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HeaderImage from '../../assets/img/header.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { APP_ROUTES } from '../navigation.types';
+import { Header } from '../../components';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
-const Header = ({ title }: { title: string }) => (
-  <ImageBackground
-    source={HeaderImage}
-    style={{
-      height: 100,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <Text>{title}</Text>
-    <Text>settings</Text>
-    <Icon name="settings-outline" color="red" />
-  </ImageBackground>
-);
 
 const HomeStackScreen = () => (
   <Stack.Navigator>
