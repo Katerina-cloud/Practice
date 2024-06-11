@@ -11,12 +11,8 @@ export const useButtonStyle = () =>
       justifyContent: 'center',
       //   ...(isDisabled && { opacity: 0.5 }), // Apply opacity when disabled
     },
-    primary: {
-
-    },
-    secondary: {
-
-    },
+    primary: {},
+    secondary: {},
     appButtonText: {
       color: 'white',
       fontSize: 16,
