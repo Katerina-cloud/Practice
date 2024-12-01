@@ -4,10 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ToolsScreen } from '../../screens/ToolsScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { APP_ROUTES } from '../navigation.types';
+import { APP_ROUTES, TabNavigatorParamList } from '../navigation.types';
 import { Header } from '../../components';
+import { HomeIcon } from '../../assets/icons';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 const Stack = createNativeStackNavigator();
 
 const HomeStackScreen = () => (
@@ -34,7 +35,7 @@ const getTabBarIcon = (routeName: string, color: string, size: number) => {
   let iconName: string;
 
   if (routeName === APP_ROUTES.HOME) {
-    iconName = 'home-outline';
+    return <HomeIcon color={color} width={size} height={size} />;
   } else if (routeName === APP_ROUTES.TOOLS) {
     iconName = 'construct-outline';
   } else {
